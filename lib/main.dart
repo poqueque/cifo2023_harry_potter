@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         fontFamily: GoogleFonts.montserrat().fontFamily,
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.white,
+        ),
       ),
       home: CharacterList(),
     );
