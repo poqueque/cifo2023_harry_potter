@@ -1,4 +1,5 @@
 class Character {
+  final int id;
   final String name;
   final String url;
   double get stars => totalStars / reviews;
@@ -7,8 +8,10 @@ class Character {
   int strength;
   int magic;
   int speed;
+  bool favorite = false;
 
   Character({
+    required this.id,
     required this.name,
     required this.url,
     this.totalStars = 0,
