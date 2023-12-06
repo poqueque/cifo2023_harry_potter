@@ -4,6 +4,8 @@ import 'package:harry_potter/providers/hogwarts_data.dart';
 import 'package:harry_potter/screens/character_list.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/preferences.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) => HogwartsData())
+        ChangeNotifierProvider(
+            create: (BuildContext context) => HogwartsData()),
+        ChangeNotifierProvider(create: (BuildContext context) => Preferences()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
         ),
-        home: CharacterList(),
+        home: const CharacterList(),
       ),
     );
   }

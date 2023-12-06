@@ -1,5 +1,10 @@
+import 'package:isar/isar.dart';
+
+part 'character.g.dart';
+
+@collection
 class Character {
-  final int id;
+  final Id id;
   final String name;
   final String url;
   double get stars => totalStars / reviews;
