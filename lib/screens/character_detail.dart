@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:harry_potter/providers/hogwarts_data.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class _CharacterDetailState extends State<CharacterDetail> {
 
   @override
   Widget build(BuildContext context) {
+    var l = AppLocalizations.of(context)!;
     return Consumer<HogwartsData>(builder: (context, data, child) {
       Character? character;
       if (widget.id != null) {
@@ -57,7 +59,12 @@ class _CharacterDetailState extends State<CharacterDetail> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Rating(value: character.stars),
-                  Text("${character.reviews} reviews"),
+                  Flexible(
+                    child: Text(
+                      l.nReviews(character.reviews),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ],
               ),
               Text(character.name,
@@ -94,21 +101,21 @@ class _CharacterDetailState extends State<CharacterDetail> {
                   Column(
                     children: [
                       const Icon(Icons.fitness_center),
-                      const Text("Força"),
+                      Text(l.strength),
                       Text("${character.strength}"),
                     ],
                   ),
                   Column(
                     children: [
                       const Icon(Icons.auto_fix_normal),
-                      const Text("Màgia"),
+                      Text(l.magic),
                       Text(character.magic.toString()),
                     ],
                   ),
                   Column(
                     children: [
                       const Icon(Icons.speed),
-                      const Text("Velocitat"),
+                      Text(l.speed),
                       Text(character.speed.toString()),
                     ],
                   )

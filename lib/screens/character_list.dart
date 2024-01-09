@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:harry_potter/providers/hogwarts_data.dart';
 import 'package:provider/provider.dart';
 
@@ -25,8 +26,8 @@ class _CharacterListState extends State<CharacterList> {
           appBar: widget.showAppBar
               ? AppBar(
                   backgroundColor: Colors.purple,
-                  title: const Text(
-                    "Welcome to Hogwarts",
+                  title: Text(
+                    AppLocalizations.of(context)!.welcomeToHogwarts,
                   ),
                   actions: [
                     Switch(

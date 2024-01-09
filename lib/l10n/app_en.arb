@@ -1,0 +1,17 @@
+{
+  "welcomeToHogwarts": "Welcome to Hogwarts",
+  "@welcomeToHogwarts": {
+    "description": "Text that appears in the header of the app"
+  },
+  "strength": "Strength",
+  "magic": "Magic",
+  "speed": "Speed",
+  "nReviews": "{count,plural, =0{no reviews} =1{1 review} other{{count} reviews}}",
+  "@nReviews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}
