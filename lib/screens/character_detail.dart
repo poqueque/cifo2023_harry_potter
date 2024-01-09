@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:harry_potter/providers/hogwarts_data.dart';
 import 'package:provider/provider.dart';
 
+import '../models/character.dart';
 import '../widgets/rating.dart';
 
 class CharacterDetail extends StatefulWidget {
-  const CharacterDetail({super.key, required this.id});
+  const CharacterDetail({super.key, required this.id, this.showAppBar = true});
 
-  final int id;
+  final int? id;
+  final bool showAppBar;
 
   @override
   State<CharacterDetail> createState() => _CharacterDetailState();
@@ -19,20 +21,37 @@ class _CharacterDetailState extends State<CharacterDetail> {
   @override
   Widget build(BuildContext context) {
     return Consumer<HogwartsData>(builder: (context, data, child) {
-      final character = data.getCharacter(widget.id);
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.purple,
-          title: Text(character.name),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
+      Character? character;
+      if (widget.id != null) {
+        character = data.getCharacter(widget.id!);
+      }
+
+      if (character == null) {
+        return const Scaffold(
+          body: Center(
+            child: Text("Please select a character"),
+          ),
+        );
+      } else {
+        return Scaffold(
+          appBar: widget.showAppBar
+              ? AppBar(
+                  backgroundColor: Colors.purple,
+                  title: Text(character.name),
+                  centerTitle: true,
+                )
+              : null,
+          body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Hero(
-                tag: character.name,
-                child: Image.network(character.url),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Hero(
+                    tag: character.name,
+                    child: Image.network(character.url),
+                  ),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,12 +72,12 @@ class _CharacterDetailState extends State<CharacterDetail> {
                       value: lastRating.toDouble(),
                       onStarClicked: (value) {
                         lastRating = value;
-                        data.addRating(character, value);
+                        data.addRating(character!, value);
                         setState(() {});
                       }),
                   InkWell(
                     onTap: () {
-                      data.toggleFavorite(widget.id);
+                      data.toggleFavorite(widget.id!);
                     },
                     child: Icon(
                       (character.favorite)
@@ -97,8 +116,8 @@ class _CharacterDetailState extends State<CharacterDetail> {
               )
             ],
           ),
-        ),
-      );
+        );
+      }
     });
   }
 }
