@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
           Locale('ca'),
           Locale('en'),
         ],
-        locale: Locale('en'),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           fontFamily: GoogleFonts.montserrat().fontFamily,
